@@ -10,11 +10,11 @@ public class RequestParserImpl implements RequestParser {
     @Override
     public HttpRequest parse(List<String> rawRequest) {
         String[] parts = rawRequest.get(0).split(" ");
-        return new HttpRequest() {{
-            setMethod(parts[0]);
-            setPath(parts[1]);
-            setHeaders(headers(rawRequest));
-        }};
+        return HttpRequest.createBuilder()
+                .withMethod(parts[0])
+                .withPath(parts[1])
+                .withHeaders(headers(rawRequest))
+                .build();
     }
 
     private Map<String, String> headers(List<String> rawRequest) {

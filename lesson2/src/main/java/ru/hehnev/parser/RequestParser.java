@@ -1,4 +1,4 @@
-package ru.hehnev;
+package ru.hehnev.parser;
 
 
 import ru.hehnev.domain.HttpRequest;

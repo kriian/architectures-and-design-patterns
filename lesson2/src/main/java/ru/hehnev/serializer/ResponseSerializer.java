@@ -1,4 +1,4 @@
-package ru.hehnev;
+package ru.hehnev.serializer;
 
 
 import ru.hehnev.domain.HttpResponse;

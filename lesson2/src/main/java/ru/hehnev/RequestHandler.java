@@ -1,17 +1,25 @@
 package ru.hehnev;
 
+import ru.hehnev.domain.HttpRequest;
+import ru.hehnev.domain.HttpResponse;
 import ru.hehnev.logger.ConsoleLogger;
 import ru.hehnev.logger.Logger;
+import ru.hehnev.parser.RequestParser;
+import ru.hehnev.parser.RequestParserImpl;
+import ru.hehnev.serializer.ResponseSerializer;
+import ru.hehnev.serializer.ResponseSerializerImpl;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class RequestHandler implements Runnable {
 
-    private static final String WWW = "/Users/aleks/dev/geek-architecture-123/www";
+    private static final String WWW = "C:\\Users\\maniana\\IdeaProjects\\architectures-and-design-patterns\\lesson2\\src\\main\\resources\\www";
 
     private static final Logger logger = new ConsoleLogger();
 
@@ -27,15 +35,23 @@ public class RequestHandler implements Runnable {
         List<String> request = socketService.readRequest();
 
         // TODO use here implementation of interface RequestParser
-        String[] parts = request.get(0).split(" ");
+        RequestParser requestParser = new RequestParserImpl();
+        HttpRequest httpRequest = requestParser.parse(request);
 
-        Path path = Paths.get(WWW, parts[1]);
+        Path path = Paths.get(WWW, httpRequest.getPath());
+        ResponseSerializer responseSerializer = new ResponseSerializerImpl();
         if (!Files.exists(path)) {
             // TODO use implementation of interface ResponseSerializer
+            HttpResponse httpResponse = new HttpResponse() {{
+                setStatusLine("HTTP/1.1 404 NOT_FOUND");
+                setHeaders(
+                        new HashMap<>() {{
+                            put("Content-Type", "text/html; charset=utf-8");
+                        }}
+                );
+            }};
             socketService.writeResponse(
-                    "HTTP/1.1 404 NOT_FOUND\n" +
-                            "Content-Type: text/html; charset=utf-8\n" +
-                            "\n",
+                    responseSerializer.serialize(httpResponse),
                    new StringReader("<h1>Файл не найден!</h1>\n")
             );
             return;
@@ -43,9 +59,16 @@ public class RequestHandler implements Runnable {
 
         try {
             // TODO use implementation of interface ResponseSerializer
-            socketService.writeResponse("HTTP/1.1 200 OK\n" +
-                    "Content-Type: text/html; charset=utf-8\n" +
-                    "\n",
+            HttpResponse httpResponse = new HttpResponse() {{
+               setStatusLine("HTTP/1.1 200 OK");
+               setHeaders(
+                       new HashMap<>() {{
+                           put("Content-Type", "text/html; charset=utf-8");
+                       }}
+               );
+            }};
+            socketService.writeResponse(
+                    responseSerializer.serialize(httpResponse),
                     Files.newBufferedReader(path));
         } catch (IOException e) {
             throw new RuntimeException(e);

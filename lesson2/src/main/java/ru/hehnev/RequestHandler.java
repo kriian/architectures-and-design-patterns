@@ -31,7 +31,6 @@ public class RequestHandler implements Runnable {
 
     @Override
     public void run() {
-
         List<String> request = socketService.readRequest();
 
         // TODO use here implementation of interface RequestParser
@@ -42,31 +41,27 @@ public class RequestHandler implements Runnable {
         ResponseSerializer responseSerializer = new ResponseSerializerImpl();
         if (!Files.exists(path)) {
             // TODO use implementation of interface ResponseSerializer
-            HttpResponse httpResponse = new HttpResponse() {{
-                setStatusLine("HTTP/1.1 404 NOT_FOUND");
-                setHeaders(
-                        new HashMap<>() {{
-                            put("Content-Type", "text/html; charset=utf-8");
-                        }}
-                );
-            }};
+            var httpResponse = HttpResponse.creatBuilder()
+                    .withStatusLine("HTTP/1.1 404 NOT_FOUND")
+                    .withHeaders(new HashMap<>() {{
+                        put("Content-Type", "text/html; charset=utf-8");
+                    }})
+                    .build();
             socketService.writeResponse(
                     responseSerializer.serialize(httpResponse),
-                   new StringReader("<h1>Файл не найден!</h1>\n")
+                    new StringReader("<h1>Файл не найден!</h1>\n")
             );
             return;
         }
 
         try {
             // TODO use implementation of interface ResponseSerializer
-            HttpResponse httpResponse = new HttpResponse() {{
-               setStatusLine("HTTP/1.1 200 OK");
-               setHeaders(
-                       new HashMap<>() {{
-                           put("Content-Type", "text/html; charset=utf-8");
-                       }}
-               );
-            }};
+            var httpResponse = HttpResponse.creatBuilder()
+                    .withStatusLine("HTTP/1.1 200 OK")
+                    .withHeaders(new HashMap<>() {{
+                        put("Content-Type", "text/html; charset=utf-8");
+                    }})
+                    .build();
             socketService.writeResponse(
                     responseSerializer.serialize(httpResponse),
                     Files.newBufferedReader(path));

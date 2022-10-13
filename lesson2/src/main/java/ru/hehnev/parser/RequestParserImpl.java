@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RequestParserImpl implements RequestParser {
+class RequestParserImpl implements RequestParser {
     @Override
     public HttpRequest parse(List<String> rawRequest) {
         String[] parts = rawRequest.get(0).split(" ");

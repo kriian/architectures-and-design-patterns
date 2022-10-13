@@ -1,15 +1,15 @@
 package ru.hehnev;
 
 
-import ru.hehnev.logger.ConsoleLogger;
 import ru.hehnev.logger.Logger;
+import ru.hehnev.logger.LoggerFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class HttpServer {
-    private static final Logger logger = new ConsoleLogger();
+    private static final Logger logger = LoggerFactory.createLogger();
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(8088)) {

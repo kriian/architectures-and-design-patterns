@@ -1,4 +1,4 @@
-package ru.hehnev;
+package ru.hehnev.handler;
 
 import ru.hehnev.domain.HttpRequest;
 import ru.hehnev.domain.HttpResponse;
@@ -8,6 +8,7 @@ import ru.hehnev.parser.RequestParser;
 import ru.hehnev.parser.RequestParserFactory;
 import ru.hehnev.serializer.ResponseSerializer;
 import ru.hehnev.serializer.ResponseSerializerFactory;
+import ru.hehnev.service.SocketService;
 
 import java.io.IOException;
 import java.io.StringReader;

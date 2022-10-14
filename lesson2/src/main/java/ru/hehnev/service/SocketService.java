@@ -1,4 +1,4 @@
-package ru.hehnev;
+package ru.hehnev.service;
 
 import ru.hehnev.logger.Logger;
 import ru.hehnev.logger.LoggerFactory;

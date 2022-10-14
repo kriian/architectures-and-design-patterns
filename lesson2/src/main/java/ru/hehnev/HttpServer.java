@@ -4,7 +4,7 @@ package ru.hehnev;
 import ru.hehnev.handler.RequestHandler;
 import ru.hehnev.logger.Logger;
 import ru.hehnev.logger.LoggerFactory;
-import ru.hehnev.service.SocketService;
+import ru.hehnev.service.SocketServiceFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -21,7 +21,9 @@ public class HttpServer {
                 Socket socket = serverSocket.accept();
                 logger.info("New client connected!");
 
-                new Thread(new RequestHandler(new SocketService(socket))).start();
+                new Thread(
+                        new RequestHandler(SocketServiceFactory.createSocketService(socket))
+                ).start();
             }
         } catch (IOException e) {
             e.printStackTrace();

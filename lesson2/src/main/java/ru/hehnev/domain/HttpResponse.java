@@ -11,6 +11,8 @@ public class HttpResponse {
 
     private Map<String, String> headers;
 
+    private String body;
+
     private HttpResponse() {}
 
     public String getStatusLine() {
@@ -23,6 +25,10 @@ public class HttpResponse {
 
     public Map<String, String> getHeaders() {
         return headers;
+    }
+
+    public String getBody() {
+        return body;
     }
 
     public static Builder creatBuilder() {
@@ -50,6 +56,11 @@ public class HttpResponse {
         public Builder withHeaders(String header, String value) {
             this.httpResponse.headers = new HashMap<>();
             this.httpResponse.headers.put(header, value);
+            return this;
+        }
+
+        public Builder withBody(String body) {
+            this.httpResponse.body = body;
             return this;
         }
 

@@ -18,6 +18,6 @@ public enum ResponseCode {
     }
 
     public String getName() {
-        return name;
+        return getStatus() + name;
     }
 }

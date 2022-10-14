@@ -12,8 +12,9 @@ class ResponseSerializerImpl implements ResponseSerializer{
         httpResponse.getHeaders().forEach((key, value) -> {
             sb.append(key).append(": ").append(value);
             sb.append(System.lineSeparator()).append(System.lineSeparator());
-            sb.append(httpResponse.getBody());
         });
+        sb.append(httpResponse.getBody());
+        sb.append(System.lineSeparator()).append(System.lineSeparator());
         return sb.toString();
     }
 }

@@ -1,9 +1,13 @@
 package ru.hehnev;
 
 
+import ru.hehnev.handler.MethodHandlerFactory;
 import ru.hehnev.handler.RequestHandler;
 import ru.hehnev.logger.Logger;
 import ru.hehnev.logger.LoggerFactory;
+import ru.hehnev.serializer.ResponseSerializer;
+import ru.hehnev.serializer.ResponseSerializerFactory;
+import ru.hehnev.service.SocketService;
 import ru.hehnev.service.SocketServiceFactory;
 
 import java.io.IOException;
@@ -21,8 +25,12 @@ public class HttpServer {
                 Socket socket = serverSocket.accept();
                 logger.info("New client connected!");
 
-                new Thread(
-                        new RequestHandler(SocketServiceFactory.createSocketService(socket))
+                SocketService socketService = SocketServiceFactory.createSocketService(socket);
+                ResponseSerializer responseSerializer = ResponseSerializerFactory.creatResponseSerializer();
+
+                new Thread(new RequestHandler(
+                        socketService,
+                        MethodHandlerFactory.create(socketService, responseSerializer))
                 ).start();
             }
         } catch (IOException e) {

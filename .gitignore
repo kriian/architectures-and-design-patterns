@@ -1,2 +1,4 @@
 # Project exclude paths
-/lesson1/target/
+/.idea
+target
+out

@@ -1,5 +1,6 @@
 package ru.hehnev.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpResponse {
@@ -46,8 +47,9 @@ public class HttpResponse {
             return this;
         }
 
-        public Builder withHeaders(Map<String, String> headers) {
-            this.httpResponse.headers = headers;
+        public Builder withHeaders(String header, String value) {
+            this.httpResponse.headers = new HashMap<>();
+            this.httpResponse.headers.put(header, value);
             return this;
         }
 

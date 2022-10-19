@@ -16,7 +16,7 @@ public class UserMapper {
     public UserMapper(Connection connection) {
         this.connection = connection;
         try {
-            this.selectUser = connection.prepareStatement("select id, login, password from users where id = ?");
+            this.selectUser = connection.prepareStatement("SELECT id, login, password FROM users WHERE id = ?");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }

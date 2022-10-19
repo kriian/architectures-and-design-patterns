@@ -18,6 +18,7 @@ public class HttpServer {
     private static final Logger logger = LoggerFactory.createLogger();
 
     public static void main(String[] args) {
+        SocketService socketService = null;
         try (ServerSocket serverSocket = new ServerSocket(8088)) {
             logger.info("Server started!");
 
@@ -25,7 +26,7 @@ public class HttpServer {
                 Socket socket = serverSocket.accept();
                 logger.info("New client connected!");
 
-                SocketService socketService = SocketServiceFactory.createSocketService(socket);
+                socketService = SocketServiceFactory.createSocketService(socket);
                 ResponseSerializer responseSerializer = ResponseSerializerFactory.creatResponseSerializer();
 
                 new Thread(new RequestHandler(
@@ -35,6 +36,13 @@ public class HttpServer {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                assert socketService != null;
+                socketService.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

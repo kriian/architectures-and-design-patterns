@@ -6,9 +6,9 @@ import ru.hehnev.domain.ResponseCode;
 import ru.hehnev.serializer.ResponseSerializer;
 import ru.hehnev.service.SocketService;
 
-@Handler(order = 1)
+@Handler(order = 1, method = "POST")
 public class PostMethodHandler extends MethodHandler{
-    protected PostMethodHandler(
+    public PostMethodHandler(
             String method,
             MethodHandler next,
             SocketService socketService,

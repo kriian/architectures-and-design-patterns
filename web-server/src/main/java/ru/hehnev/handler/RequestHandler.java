@@ -11,8 +11,6 @@ import java.util.List;
 
 public class RequestHandler implements Runnable {
 
-    private static final String WWW = "C:\\Users\\maniana\\IdeaProjects\\architectures-and-design-patterns\\lesson2\\src\\main\\resources\\www";
-
     private static final Logger logger = LoggerFactory.createLogger();
 
     private final SocketService socketService;

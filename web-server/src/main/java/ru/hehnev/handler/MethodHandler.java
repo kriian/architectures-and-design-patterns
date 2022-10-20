@@ -7,6 +7,9 @@ import ru.hehnev.serializer.ResponseSerializer;
 import ru.hehnev.service.SocketService;
 
 public abstract class MethodHandler {
+
+    protected static final String WWW = "C:\\Users\\maniana\\IdeaProjects\\architectures-and-design-patterns\\web-server\\src\\main\\resources\\www";
+
     private final String method;
     private final MethodHandler next;
     protected final SocketService socketService;

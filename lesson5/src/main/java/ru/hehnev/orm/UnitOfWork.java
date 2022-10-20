@@ -34,6 +34,7 @@ public class UnitOfWork {
         insert();
         update();
         delete();
+        clear();
     }
 
     private void insert() {
@@ -83,6 +84,12 @@ public class UnitOfWork {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void clear() {
+        newUser.clear();
+        updateUser.clear();
+        deleteUser.clear();
     }
 
 }

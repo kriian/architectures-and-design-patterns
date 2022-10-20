@@ -1,6 +1,7 @@
 package ru.hehnev;
 
 
+import ru.hehnev.handler.AnnotatedHandlerFactory;
 import ru.hehnev.handler.MethodHandlerFactory;
 import ru.hehnev.handler.RequestHandler;
 import ru.hehnev.logger.Logger;
@@ -31,7 +32,7 @@ public class HttpServer {
 
                 new Thread(new RequestHandler(
                         socketService,
-                        MethodHandlerFactory.create(socketService, responseSerializer))
+                        AnnotatedHandlerFactory.create(socketService, responseSerializer))
                 ).start();
             }
         } catch (IOException e) {

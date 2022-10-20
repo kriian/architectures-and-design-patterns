@@ -11,12 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Handler(order = 0)
+@Handler(order = 0, method = "GET")
 public class GetMethodHandler extends MethodHandler {
-
-    private static final String WWW = "C:\\Users\\maniana\\IdeaProjects\\architectures-and-design-patterns\\lesson2\\src\\main\\resources\\www";
-
-    protected GetMethodHandler(
+    public GetMethodHandler(
             String method,
             MethodHandler next,
             SocketService socketService,

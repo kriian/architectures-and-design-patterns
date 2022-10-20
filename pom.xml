@@ -12,7 +12,7 @@
 
     <modules>
         <module>lesson1</module>
-        <module>lesson2</module>
+        <module>web-server</module>
         <module>lesson4</module>
         <module>lesson5</module>
     </modules>

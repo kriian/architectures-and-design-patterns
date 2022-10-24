@@ -1,9 +1,7 @@
 package ru.hehnev;
 
 
-import ru.hehnev.handler.AnnotatedHandlerFactory;
-import ru.hehnev.handler.MethodHandlerFactory;
-import ru.hehnev.handler.RequestHandler;
+import ru.hehnev.handler.*;
 import ru.hehnev.logger.Logger;
 import ru.hehnev.logger.LoggerFactory;
 import ru.hehnev.serializer.ResponseSerializer;
@@ -14,12 +12,14 @@ import ru.hehnev.service.SocketServiceFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class HttpServer {
     private static final Logger logger = LoggerFactory.createLogger();
 
     public static void main(String[] args) {
         SocketService socketService = null;
+        List<Class<?>> classes = ScanningClassesForPresenceAnnotationHandler.scan("ru.hehnev.handler");
         try (ServerSocket serverSocket = new ServerSocket(8088)) {
             logger.info("Server started!");
 
@@ -32,7 +32,7 @@ public class HttpServer {
 
                 new Thread(new RequestHandler(
                         socketService,
-                        AnnotatedHandlerFactory.create(socketService, responseSerializer))
+                        AnnotatedHandlerFactory.create(socketService, responseSerializer, classes))
                 ).start();
             }
         } catch (IOException e) {

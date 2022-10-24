@@ -3,6 +3,7 @@ package ru.hehnev.handler;
 import ru.hehnev.domain.HttpRequest;
 import ru.hehnev.domain.HttpResponse;
 import ru.hehnev.domain.ResponseCode;
+import ru.hehnev.domain.ResponseHeader;
 import ru.hehnev.serializer.ResponseSerializer;
 import ru.hehnev.service.SocketService;
 
@@ -20,7 +21,7 @@ public class PostMethodHandler extends MethodHandler{
     protected HttpResponse handelInternal(HttpRequest request) {
         return HttpResponse.creatBuilder()
                 .withStatusLine("HTTP/1.1 " + ResponseCode.OK)
-                .withHeaders("Content-Type", "text/html; charset=utf-8")
+                .withHeaders(ResponseHeader.HEADER.getContent(), ResponseHeader.HEADER_VALUE.getContent())
                 .withBody("<h1>POST method handled</h1>")
                 .build();
     }

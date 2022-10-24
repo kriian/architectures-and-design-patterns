@@ -1,15 +1,14 @@
 package ru.hehnev.handler;
 
+import ru.hehnev.config.ConfigFromFile;
 import ru.hehnev.domain.HttpRequest;
 import ru.hehnev.domain.HttpResponse;
 import ru.hehnev.domain.ResponseCode;
+import ru.hehnev.domain.ResponseHeader;
 import ru.hehnev.serializer.ResponseSerializer;
 import ru.hehnev.service.SocketService;
 
 public abstract class MethodHandler {
-
-    protected static final String WWW = "C:\\Users\\maniana\\IdeaProjects\\architectures-and-design-patterns\\web-server\\src\\main\\resources\\www";
-
     private final String method;
     private final MethodHandler next;
     protected final SocketService socketService;
@@ -33,7 +32,7 @@ public abstract class MethodHandler {
         } else {
             response = HttpResponse.creatBuilder()
                     .withStatusLine("HTTP/1.1 " + ResponseCode.METHOD_NOT_ALLOWED)
-                    .withHeaders("Content-Type", "text/html; charset=utf-8")
+                    .withHeaders(ResponseHeader.HEADER.getContent(), ResponseHeader.HEADER_VALUE.getContent())
                     .withBody("<h1>Метод не поддерживается</h1>")
                     .build();
         }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+    <output url="file://$MODULE_DIR$/MVC/target/classes" />
+    <output-test url="file://$MODULE_DIR$/MVC/target/test-classes" />
+    <content url="file://$MODULE_DIR$/MVC">
+      <sourceFolder url="file://$MODULE_DIR$/MVC/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MVC/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/MVC/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/MVC/target" />
+    </content>
+    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.13" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
+  </component>
+</module>

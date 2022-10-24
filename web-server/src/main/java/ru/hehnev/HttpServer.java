@@ -1,7 +1,10 @@
 package ru.hehnev;
 
 
-import ru.hehnev.handler.*;
+import ru.hehnev.config.ConfigFromFile;
+import ru.hehnev.handler.AnnotatedHandlerFactory;
+import ru.hehnev.handler.RequestHandler;
+import ru.hehnev.handler.ScanningClassesForPresenceAnnotationHandler;
 import ru.hehnev.logger.Logger;
 import ru.hehnev.logger.LoggerFactory;
 import ru.hehnev.serializer.ResponseSerializer;
@@ -20,8 +23,9 @@ public class HttpServer {
     public static void main(String[] args) {
         SocketService socketService = null;
         List<Class<?>> classes = ScanningClassesForPresenceAnnotationHandler.scan("ru.hehnev.handler");
-        try (ServerSocket serverSocket = new ServerSocket(8088)) {
+        try (ServerSocket serverSocket = new ServerSocket(ConfigFromFile.getPort())) {
             logger.info("Server started!");
+
 
             while (true) {
                 Socket socket = serverSocket.accept();
